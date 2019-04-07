@@ -49,7 +49,7 @@ public class InputView extends View {
         Log.d(TAG,"mClickCount: "+mClickCount);
         if(mClickCount==2)
         {
-            this.setVisibility(View.GONE);
+            hide();
         }
 
         // refresh
@@ -69,7 +69,6 @@ public class InputView extends View {
         initSplitter();
         initPath();
         initMapping();
-        this.setVisibility(View.VISIBLE);
     }
 
     private Paint splitterPaint;
@@ -219,6 +218,18 @@ public class InputView extends View {
     private void backspace() {
         if (onBackspaceListener != null) {
             onBackspaceListener.onBackspace();
+        }
+    }
+
+    private OnHideKeyboardListener onHideKeyboardListener;
+
+    public void setOnHideKeyboardListener(OnHideKeyboardListener listener) {
+        onHideKeyboardListener = listener;
+    }
+
+    private void hide() {
+        if (onHideKeyboardListener != null) {
+            onHideKeyboardListener.onHideKeyboard();
         }
     }
 

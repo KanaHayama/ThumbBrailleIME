@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputBinding;
 import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -249,6 +250,12 @@ public class BrailleKeyboard extends InputMethodService {
                 BrailleKeyboard.this.getCurrentInputConnection().deleteSurroundingText(1, 0);
             }
         });
+        inputView.setOnHideKeyboardListener(new OnHideKeyboardListener() {
+            @Override
+            public void onHideKeyboard() {
+                BrailleKeyboard.this.requestHideSelf(0);
+            }
+        });
         layout.addView(inputView);
         return layout;
     }
@@ -268,6 +275,7 @@ public class BrailleKeyboard extends InputMethodService {
         inputView.newSession();
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("default_setting", 0);
         Setting.setPreference(prefs);
+
     }
 
     private static File getFileForResource(

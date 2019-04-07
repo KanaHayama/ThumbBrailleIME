@@ -9,5 +9,12 @@
             android:key="@string/pref_strong_hand_key"
             android:defaultValue="@string/pref_strong_hand_default_value"
             />
+        <ListPreference
+            android:title="@string/pref_true_side_title"
+            android:entries="@array/pref_true_side_entries"
+            android:entryValues="@array/pref_true_side_entry_values"
+            android:key="@string/pref_true_side_key"
+            android:defaultValue="@string/pref_true_side_default_value"
+            />
     </PreferenceCategory>
 </PreferenceScreen>

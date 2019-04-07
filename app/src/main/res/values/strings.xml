@@ -4,4 +4,7 @@
     <string name="pref_strong_hand_title">Strong hand</string>
     <string name="pref_strong_hand_key">strong_hand</string>
     <string name="pref_strong_hand_default_value">right</string>
+    <string name="pref_true_side_title">True side</string>
+    <string name="pref_true_side_key">true_side</string>
+    <string name="pref_true_side_default_value">left</string>
 </resources>

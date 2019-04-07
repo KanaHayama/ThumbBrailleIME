@@ -20,11 +20,13 @@ import android.app.AppOpsManager;
 import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.inputmethodservice.InputMethodService;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RawRes;
@@ -264,6 +266,8 @@ public class BrailleKeyboard extends InputMethodService {
         mWebpButton.setEnabled(mWebpFile != null && isCommitContentSupported(info, MIME_TYPE_WEBP));
         //demo
         inputView.newSession();
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("default_setting", 0);
+        Setting.setPreference(prefs);
     }
 
     private static File getFileForResource(

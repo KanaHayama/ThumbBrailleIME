@@ -1,5 +1,6 @@
 package com.tbraille.android;
 
+import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,8 +45,11 @@ public class SpeechActivity extends AppCompatActivity {
         speech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textToSpeech.speak(input.getText().toString(),
-                        TextToSpeech.QUEUE_ADD, null);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    textToSpeech.speak(input.getText(),TextToSpeech.QUEUE_FLUSH,null,null);
+                } else {
+                    textToSpeech.speak(String.valueOf(input.getText()), TextToSpeech.QUEUE_FLUSH, null);
+                }
             }
         });
 

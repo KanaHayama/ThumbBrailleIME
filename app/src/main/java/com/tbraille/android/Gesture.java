@@ -32,7 +32,7 @@ public class Gesture {
                 break;
             }
         }
-        
+
         //clear
         if(length!=0) {
             if (path[length - 1][1] <= path[0][1]) {

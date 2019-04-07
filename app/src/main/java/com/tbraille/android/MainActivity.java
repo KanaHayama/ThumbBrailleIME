@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dataList = new ArrayList<String>();
-        dataList.add("Go to Speech");
         dataList.add("Settings");
         // Setting adapter
         ListAdapter adapter = new ArrayAdapter<String>(MainActivity.this,
@@ -41,12 +40,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // position is the position of which data you are clicking
-        if(position == 0) {
-            Intent intent = new Intent(MainActivity.this, SpeechActivity.class);
-            startActivity(intent);
-        }
         // setting
-        if (position == 1) {
+        if (position == 0) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         }

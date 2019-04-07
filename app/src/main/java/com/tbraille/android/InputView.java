@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,11 +16,15 @@ public class InputView extends View {
     private static final String TAG = "count";
     int count;
     int width;
+    private TextToSpeech textToSpeech;
+    TTSManager ttsManager = null;
 
     public double[][] record;
 
     public InputView(Context context) {
         super(context);
+        ttsManager = new TTSManager();
+        ttsManager.init(context);
         DisplayMetrics outMetrics = new DisplayMetrics();
         width = outMetrics.widthPixels;
         setBackgroundColor(Color.parseColor("#BB000000"));
@@ -119,6 +124,7 @@ public class InputView extends View {
                     Mapping.MapResult result = mapping.getMapping(braille);
                     Log.d("text", "recognized: " + result.text + " voice: " + result.voice);
                     //TODO: call voice
+                    tts(result.voice);
 
                     //TODO: insert text
 
@@ -132,6 +138,9 @@ public class InputView extends View {
                 record[count++][1] = event.getY();
                 break;
         }
+    }
+    protected void tts(String text){
+        ttsManager.initQueue(text);
     }
 
 }

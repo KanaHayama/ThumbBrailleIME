@@ -1,6 +1,6 @@
-PPT outline
+## PPT outline
 
-**Background** Proposed solution
+**Background and Motivation**
 
 They estimate that 1 million Americans were legally blind (**20/200** vision or worse) in 2015.
 

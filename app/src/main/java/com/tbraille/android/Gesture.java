@@ -32,11 +32,12 @@ public class Gesture {
                 break;
             }
         }
-
-        Log.d(TAG, "length=" + length);
+        
         //clear
-        if(path[length-1][1]<=path[0][1]){
-            return 8;
+        if(length!=0) {
+            if (path[length - 1][1] <= path[0][1]) {
+                return 8;
+            }
         }
 
         //down-down in left

@@ -74,7 +74,6 @@ public class InputView extends View {
     }
 
     private void recordPath(MotionEvent event) {
-        Log.d(TAG, "index=" + count++);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 path.reset();
@@ -83,6 +82,9 @@ public class InputView extends View {
                 record = new double[10000][2];
                 break;
             case MotionEvent.ACTION_UP:
+                for (int i = 0; i<10;i++) {
+                    Log.d("record", record[i][0] + "");
+                }
                 Gesture.getGesture(record, width/2);
                 break;
             case MotionEvent.ACTION_MOVE:

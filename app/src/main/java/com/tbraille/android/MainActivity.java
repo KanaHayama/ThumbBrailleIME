@@ -7,10 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private ListView listview;
     // 模拟数据
     private List<String> dataList = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listview.setAdapter(adapter);
         // bind item click event
         listview.setOnItemClickListener(this);
+
     }
 
     @SuppressLint("WrongConstant")
@@ -53,4 +51,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 //        Toast.makeText(MainActivity.this, "Click on" + position + "",0).show();
     }
+
 }

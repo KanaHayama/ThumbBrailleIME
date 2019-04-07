@@ -5,18 +5,25 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class InputView extends View {
+
+    private static final String TAG = "count";
+    int count;
+    int width;
+
+    public double[][] record = new double[10000][2];
+
     public InputView(Context context) {
         super(context);
         setBackgroundColor(Color.parseColor("#BB000000"));
         initSplitter();
         initPath();
-
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -65,23 +72,29 @@ public class InputView extends View {
     }
 
     private void recordPath(MotionEvent event) {
+        Log.d(TAG, "index=" + count++);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 path.reset();
                 path.moveTo(event.getX(), event.getY());
+                DisplayMetrics outMetrics = new DisplayMetrics();
+                width = outMetrics.widthPixels;
+                count = 0;
+                record = new double[10000][2];
                 break;
             case MotionEvent.ACTION_UP:
+                Gesture.getGesture(record,width/2);
                 break;
             case MotionEvent.ACTION_MOVE:
                 path.lineTo(event.getX(), event.getY());
+                record[count][0] = event.getX();
+                record[count++][1] = event.getY();
                 break;
         }
     }
 
     private void drawPath(Canvas canvas) {
         canvas.drawPath(path, pathPaint);
-
     }
-
 
 }

@@ -21,6 +21,7 @@ import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.inputmethodservice.InputMethodService;
 import android.net.Uri;
 import android.os.Build;
@@ -234,7 +235,6 @@ public class BrailleKeyboard extends InputMethodService {
         // demo
         View inputView = new InputView(this);
         layout.addView(inputView);
-
         return layout;
     }
 

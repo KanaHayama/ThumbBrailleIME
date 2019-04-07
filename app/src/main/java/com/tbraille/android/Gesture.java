@@ -9,7 +9,7 @@ public class Gesture {
 
     private static final String TAG = "count";
 
-    public static int getGesture(double[][] path, int mid) {
+    public static int getGesture(double[][] path, float mid) {
         /*
          * 8:clear
          * 7:down-down in left

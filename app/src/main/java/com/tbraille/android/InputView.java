@@ -15,7 +15,7 @@ public class InputView extends View {
 
     private static final String TAG = "count";
     int count;
-    int width;
+    float width;
     private TextToSpeech textToSpeech;
     TTSManager ttsManager = null;
 
@@ -63,6 +63,7 @@ public class InputView extends View {
 
     private void drawSplitter(Canvas canvas) {
         float x = canvas.getWidth() * Setting.getSplitterPosition();
+        width = x;
         canvas.drawLine(x, 0, x, canvas.getHeight(), splitterPaint);
     }
 
@@ -114,10 +115,7 @@ public class InputView extends View {
                 record = new double[10000][2];
                 break;
             case MotionEvent.ACTION_UP:
-                for (int i = 0; i<10;i++) {
-                    Log.d("record", record[i][0] + "");
-                }
-                int half = Gesture.getGesture(record, width/2);
+                int half = Gesture.getGesture(record, width);
                 if (halfFlag) {
                     halfFlag = false;
                     int braille = half << 3 | firstHalf;

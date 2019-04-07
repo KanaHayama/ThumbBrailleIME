@@ -129,7 +129,9 @@ public class InputView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 int half = Gesture.getGesture(record, width);
-                if (half == 8) {
+                if (half == 9) {
+                    //click
+                } else if (half == 8) {
                     nextColor();
                     if (!halfFlag) {
                         backspace();

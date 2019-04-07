@@ -11,6 +11,7 @@ public class Gesture {
 
     public static int getGesture(double[][] path, float mid) {
         /*
+         * 9:click
          * 8:clear
          * 7:down-down in left
          * 0:down-down in right
@@ -32,7 +33,7 @@ public class Gesture {
                 break;
             }
         }
-        if(length == 0){
+        if(length < 2){ //TODO: magic number
             Log.d("Click","Click");
             return 9;
         }

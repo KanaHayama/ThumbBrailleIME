@@ -4,7 +4,7 @@ The commonly used Braille input method requires two-hand input, which limits the
 
 It is developed on top of Android platform. People who know Braille can get started quickly with nearly no additional memory burden. No additional hardward needed.
 
-*NOTE:* This is a hackathon project, it has basic functions but NOT recommended to use directly in the actual scene.
+*NOTE:* This is a hackathon project, it has basic functions but NOT recommended to use directly in the actual scene. The Braille system has been simplified.
 
 # Tutorial
 
@@ -35,10 +35,8 @@ Left part represents there has a dot and right part represents there is not a do
 
 After two strokes are drawn, the braille will be added into the text box and will be read out for you to confirm.
 
-And also, double click any place to hide the IME, and swipe up to reset first stroke (if the 2nd stroke is not drawn) or do backspace.
+And also, double click any place to hide the IME, and swipe up to reset first stroke (if the 2nd stroke has not been drawn) or do backspace.
 
 There are two settings that you can change. The first setting is "strong hand", it will change the proportion of left and right division. The second setting is "true side", you can set which side represents True.
-
-*NOTE:* Braille system has been simplified, due to lacking of time.
 
 

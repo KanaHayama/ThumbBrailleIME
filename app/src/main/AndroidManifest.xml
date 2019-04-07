@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SpeechActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,12 +19,15 @@
         </activity>
 
         <service
-            android:name="com.tbraille.android.BrailleKeyboard"
+            android:name=".BrailleKeyboard"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
             </intent-filter>
-            <meta-data android:name="android.view.im" android:resource="@xml/method" />
+
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
         </service>
 
         <provider

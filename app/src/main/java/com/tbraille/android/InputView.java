@@ -54,6 +54,7 @@ public class InputView extends View {
         initSplitter();
         initPath();
         initMapping();
+        this.setVisibility(View.VISIBLE);
     }
 
     private Paint splitterPaint;

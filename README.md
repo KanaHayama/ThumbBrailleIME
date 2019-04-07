@@ -31,6 +31,7 @@ http://www.ankitdaf.com/projects/BrailleType/
 **Mass Market the Application**
 
 **Future Work**
+1. DB contains different sets of gestures of different areas
 
 **References**
 

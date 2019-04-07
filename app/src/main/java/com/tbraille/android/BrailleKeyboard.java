@@ -62,6 +62,8 @@ public class BrailleKeyboard extends InputMethodService {
     private Button mPngButton;
     private Button mWebpButton;
 
+    private InputView inputView;
+
     private boolean isCommitContentSupported(
             @Nullable EditorInfo editorInfo, @NonNull String mimeType) {
         if (editorInfo == null) {
@@ -226,14 +228,13 @@ public class BrailleKeyboard extends InputMethodService {
                         "Android N recovery animation", MIME_TYPE_WEBP, mWebpFile);
             }
         });
-
         final LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
-        layout.addView(mGifButton);
-        layout.addView(mPngButton);
-        layout.addView(mWebpButton);
+        //layout.addView(mGifButton);
+        //layout.addView(mPngButton);
+        //layout.addView(mWebpButton);
         // demo
-        InputView inputView = new InputView(this);
+        inputView = new InputView(this);
         inputView.setOnCommitTextListener(new OnCommitTextListener() {
             @Override
             public void onCommitText(String text) {
@@ -261,6 +262,8 @@ public class BrailleKeyboard extends InputMethodService {
         mGifButton.setEnabled(mGifFile != null && isCommitContentSupported(info, MIME_TYPE_GIF));
         mPngButton.setEnabled(mPngFile != null && isCommitContentSupported(info, MIME_TYPE_PNG));
         mWebpButton.setEnabled(mWebpFile != null && isCommitContentSupported(info, MIME_TYPE_WEBP));
+        //demo
+        inputView.newSession();
     }
 
     private static File getFileForResource(

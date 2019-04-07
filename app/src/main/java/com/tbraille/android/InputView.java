@@ -50,6 +50,12 @@ public class InputView extends View {
         drawPath(canvas);
     }
 
+    public void newSession() {
+        initSplitter();
+        initPath();
+        initMapping();
+    }
+
     private Paint splitterPaint;
 
     private void initSplitter() {

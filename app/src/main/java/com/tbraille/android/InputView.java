@@ -168,6 +168,9 @@ public class InputView extends View {
                         tts("Reset");
                     }
                 } else {
+                    if (!Setting.getIsLeftAssignTrue()) {
+                        half = 7 - half;
+                    }
                     if (!halfFlag) {
                         halfFlag = true;
                         firstHalf = half;

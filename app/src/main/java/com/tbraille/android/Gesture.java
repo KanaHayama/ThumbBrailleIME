@@ -33,7 +33,7 @@ public class Gesture {
                 break;
             }
         }
-        if(length < 2){ //TODO: magic number
+        if(length < 4){ //TODO: magic number
             return 9;
         }
         //clear

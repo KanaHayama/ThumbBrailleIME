@@ -25,6 +25,7 @@ public class Mapping {
     private static final String CAPITAL_VOICE = "Capital follows";
     private static final String NUMBER_VOICE = "Number follows";
     private static final String NULL_VOICE = "Wrong input";
+    private static final String SPCACE_VOICE = "Space";
 
     private  State state;
 
@@ -164,6 +165,8 @@ public class Mapping {
                 state = State.Number;
                 return new MapResult("", NUMBER_VOICE);
             }
+        } else if (braille == Integer.valueOf("000000",2)) {
+            return new MapResult(" ", SPCACE_VOICE);
         } else {
             String text;
             switch (state) {

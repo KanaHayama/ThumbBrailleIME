@@ -2,7 +2,9 @@ package com.tbraille.android;
 
 public class Setting {
 
-    public static boolean getIsLeftAssignTrue() {return true;}
+    public static boolean getIsLeftAssignTrue() {
+        return true;
+    }
 
     public static float getSplitterPosition() {
         return 0.5f;

@@ -11,7 +11,8 @@ public class Setting {
     }
 
     public static boolean getIsLeftAssignTrue() {
-        return preference.getString("true_side", "left") == "left";
+        String setting = preference.getString("true_side", "left");
+        return  "left".equals(setting);
     }
 
     public static float getSplitterPosition() {

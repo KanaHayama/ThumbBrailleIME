@@ -47,8 +47,7 @@ public class InputView extends View {
         recognize(event);
 
         Log.d(TAG,"mClickCount: "+mClickCount);
-        if(mClickCount==2)
-        {
+        if(mClickCount>=2) {
             hide();
         }
 

@@ -34,7 +34,6 @@ public class Gesture {
             }
         }
         if(length < 2){ //TODO: magic number
-            Log.d("Click","Click");
             return 9;
         }
         //clear

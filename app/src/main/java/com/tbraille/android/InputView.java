@@ -130,7 +130,7 @@ public class InputView extends View {
             case MotionEvent.ACTION_UP:
                 int half = Gesture.getGesture(record, width);
                 if (half == 9) {
-                    //click
+                    Log.d("gesture", "click");
                 } else if (half == 8) {
                     nextColor();
                     if (!halfFlag) {

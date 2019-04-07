@@ -1,28 +1,13 @@
 package com.tbraille.android;
 
 
+import android.util.Log;
+
 import java.util.Map;
 
 public class Gesture {
 
-    Map<Integer, String> gestureDictionary;
-
-    public Gesture() {
-//        gestureDictionary = new HashMap<>();
-//        gestureDictionary.put(10,"A");
-//        gestureDictionary.put(30,"B");
-//        gestureDictionary.put(11,"C");
-//        gestureDictionary.put(13,"D");
-//        gestureDictionary.put(12,"E");
-//        gestureDictionary.put(31,"F");
-//        gestureDictionary.put(33,"G");
-//        gestureDictionary.put(30,'B');
-//        gestureDictionary.put(30,'B');
-//        gestureDictionary.put(30,'B');
-//        gestureDictionary.put(30,'B');
-//        gestureDictionary.put(30,'B');
-//        gestureDictionary.put(30,'B');
-    }
+    private static final String TAG = "count";
 
     public static int getGesture(double[][] path, int mid) {
         /*
@@ -38,14 +23,17 @@ public class Gesture {
          */
         //length: path length
         int length = 0;
+        Log.d(TAG,"path=" + path.length);
         for(int i = 0; i<path.length; i++){
+
             length = i;
+            Log.d(TAG, "length=" + length);
             if(path[i][0] == 0){
                 break;
             }
         }
 
-
+        Log.d(TAG, "length=" + length);
         //clear
         if(path[length-1][1]<=path[0][1]){
             return 8;
@@ -61,6 +49,7 @@ public class Gesture {
                 break;
             }
         }
+        Log.d(TAG, "t2=" + t);
 
         if(t==length){
             return 7;

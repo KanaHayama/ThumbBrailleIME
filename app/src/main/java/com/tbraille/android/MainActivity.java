@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private ListView listview;
     // 模拟数据
     private List<String> dataList = null;
+    public static int width;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

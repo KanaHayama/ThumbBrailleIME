@@ -16,10 +16,12 @@ public class InputView extends View {
     int count;
     int width;
 
-    public double[][] record = new double[10000][2];
+    public double[][] record;
 
     public InputView(Context context) {
         super(context);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        width = outMetrics.widthPixels;
         setBackgroundColor(Color.parseColor("#BB000000"));
         initSplitter();
         initPath();
@@ -77,13 +79,11 @@ public class InputView extends View {
             case MotionEvent.ACTION_DOWN:
                 path.reset();
                 path.moveTo(event.getX(), event.getY());
-                DisplayMetrics outMetrics = new DisplayMetrics();
-                width = outMetrics.widthPixels;
                 count = 0;
                 record = new double[10000][2];
                 break;
             case MotionEvent.ACTION_UP:
-                Gesture.getGesture(record,width/2);
+                Gesture.getGesture(record, width/2);
                 break;
             case MotionEvent.ACTION_MOVE:
                 path.lineTo(event.getX(), event.getY());

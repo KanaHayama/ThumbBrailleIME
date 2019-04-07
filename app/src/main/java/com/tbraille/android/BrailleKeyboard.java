@@ -233,7 +233,19 @@ public class BrailleKeyboard extends InputMethodService {
         layout.addView(mPngButton);
         layout.addView(mWebpButton);
         // demo
-        View inputView = new InputView(this);
+        InputView inputView = new InputView(this);
+        inputView.setOnCommitTextListener(new OnCommitTextListener() {
+            @Override
+            public void onCommitText(String text) {
+                BrailleKeyboard.this.getCurrentInputConnection().commitText(text, 1);
+            }
+        });
+        inputView.setOnBackspaceListener(new OnBackspaceListener() {
+            @Override
+            public void onBackspace() {
+                BrailleKeyboard.this.getCurrentInputConnection().deleteSurroundingText(1, 0);
+            }
+        });
         layout.addView(inputView);
         return layout;
     }

@@ -69,15 +69,23 @@ public class InputView extends View {
 
     private Path path;
     private Paint pathPaint;
+    private int[] colors;
+    private int colorIndxe;
 
     private void initPath() {
         path = new Path();
+        colors = new int[]{Color.RED, Color.GREEN, Color.BLUE};
+        colorIndxe = 0;
         pathPaint = new Paint();
-
-        pathPaint.setColor(Color.RED);
+        pathPaint.setColor(colors[colorIndxe]);
         pathPaint.setAntiAlias(true);
         pathPaint.setStyle(Paint.Style.STROKE);
         pathPaint.setStrokeWidth(Setting.getPathWidth());
+    }
+
+    private void nextColor() {
+        colorIndxe = (colorIndxe + 1) % colors.length;
+
     }
 
     private void recordPath(MotionEvent event) {
@@ -85,6 +93,7 @@ public class InputView extends View {
             case MotionEvent.ACTION_DOWN:
                 path.reset();
                 path.moveTo(event.getX(), event.getY());
+                pathPaint.setColor(colors[colorIndxe]);
                 break;
             case MotionEvent.ACTION_UP:
                 break;
@@ -104,6 +113,10 @@ public class InputView extends View {
 
     private void initMapping() {
         mapping = new Mapping();
+        reset();
+    }
+
+    private void reset() {
         halfFlag = false;
         firstHalf = 0;
     }
@@ -116,19 +129,29 @@ public class InputView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 int half = Gesture.getGesture(record, width);
-                if (halfFlag) {
-                    halfFlag = false;
-                    int braille = half << 3 | firstHalf;
-                    Mapping.MapResult result = mapping.getMapping(braille);
-                    Log.d("text", "recognized: " + result.text + " voice: " + result.voice);
-                    //TODO: call voice
-                    tts(result.voice);
-
-                    //TODO: insert text
-
+                if (half == 8) {
+                    nextColor();
+                    if (!halfFlag) {
+                        backspace();
+                        tts("Backspace");
+                    } else {
+                        reset();
+                        tts("Reset");
+                    }
                 } else {
-                    halfFlag = true;
-                    firstHalf = half;
+                    if (!halfFlag) {
+                        halfFlag = true;
+                        firstHalf = half;
+
+                    } else {
+                        nextColor();
+                        halfFlag = false;
+                        int braille = half << 3 | firstHalf;
+                        Mapping.MapResult result = mapping.getMapping(braille);
+                        Log.d("text", "recognized: " + result.text + " voice: " + result.voice);
+                        tts(result.voice);
+                        commitText(result.text);
+                    }
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -137,8 +160,33 @@ public class InputView extends View {
                 break;
         }
     }
+
     protected void tts(String text){
         ttsManager.initQueue(text);
+    }
+
+    private OnCommitTextListener onCommitTextListener;
+
+    public void setOnCommitTextListener(OnCommitTextListener listener) {
+        onCommitTextListener = listener;
+    }
+
+    private void commitText(String text) {
+        if (onCommitTextListener != null) {
+            onCommitTextListener.onCommitText(text);
+        }
+    }
+
+    private OnBackspaceListener onBackspaceListener;
+
+    public void setOnBackspaceListener(OnBackspaceListener listener) {
+        onBackspaceListener = listener;
+    }
+
+    private void backspace() {
+        if (onBackspaceListener != null) {
+            onBackspaceListener.onBackspace();
+        }
     }
 
 }

@@ -25,13 +25,14 @@ public class InputView extends View {
         setBackgroundColor(Color.parseColor("#BB000000"));
         initSplitter();
         initPath();
+        initMapping();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         recordPath(event);
         // judge input
-
+        recognize(event);
         // refresh
         invalidate();
         return true;
@@ -78,6 +79,32 @@ public class InputView extends View {
             case MotionEvent.ACTION_DOWN:
                 path.reset();
                 path.moveTo(event.getX(), event.getY());
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                path.lineTo(event.getX(), event.getY());
+                break;
+        }
+    }
+
+    private void drawPath(Canvas canvas) {
+        canvas.drawPath(path, pathPaint);
+    }
+
+    private Mapping mapping;
+    private boolean halfFlag;
+    private int firstHalf;
+
+    private void initMapping() {
+        mapping = new Mapping();
+        halfFlag = false;
+        firstHalf = 0;
+    }
+
+    private void recognize(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
                 count = 0;
                 record = new double[10000][2];
                 break;
@@ -85,18 +112,26 @@ public class InputView extends View {
                 for (int i = 0; i<10;i++) {
                     Log.d("record", record[i][0] + "");
                 }
-                Gesture.getGesture(record, width/2);
+                int half = Gesture.getGesture(record, width/2);
+                if (halfFlag) {
+                    halfFlag = false;
+                    int braille = half << 3 | firstHalf;
+                    Mapping.MapResult result = mapping.getMapping(braille);
+                    Log.d("text", "recognized: " + result.text + " voice: " + result.voice);
+                    //TODO: call voice
+
+                    //TODO: insert text
+
+                } else {
+                    halfFlag = true;
+                    firstHalf = half;
+                }
                 break;
             case MotionEvent.ACTION_MOVE:
-                path.lineTo(event.getX(), event.getY());
                 record[count][0] = event.getX();
                 record[count++][1] = event.getY();
                 break;
         }
-    }
-
-    private void drawPath(Canvas canvas) {
-        canvas.drawPath(path, pathPaint);
     }
 
 }

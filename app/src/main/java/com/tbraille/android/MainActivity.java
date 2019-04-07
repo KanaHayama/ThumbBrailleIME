@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         dataList = new ArrayList<String>();
         dataList.add("Settings");
+        dataList.add("About us");
         // Setting adapter
         ListAdapter adapter = new ArrayAdapter<String>(MainActivity.this,
                 android.R.layout.simple_list_item_1, dataList);
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // setting
         if (position == 0) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        if (position == 1) {
+            Intent intent = new Intent(MainActivity.this, Aboutus.class);
             startActivity(intent);
         }
 //        Toast.makeText(MainActivity.this, "Click on" + position + "",0).show();

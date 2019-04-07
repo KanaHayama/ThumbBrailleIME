@@ -16,6 +16,8 @@ The esmated number of people visually impaired in the world is **285 million**, 
 
 ![iOS input Method](https://i.ytimg.com/vi/W-DN6E-JKFU/maxresdefault.jpg)
 
+**Comparation**
+http://www.ankitdaf.com/projects/BrailleType/
 
 
 **Proposed solution**

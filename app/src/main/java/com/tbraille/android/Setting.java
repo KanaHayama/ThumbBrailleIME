@@ -15,4 +15,8 @@ public class Setting {
     public static float getPathWidth() {
         return 4;
     }
+
+    public static float getClickDistanceThreshold() {
+        return 10.0f;
+    }
 }

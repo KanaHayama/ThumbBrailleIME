@@ -1,5 +1,7 @@
 package com.tbraille.android;
 
+import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,8 +10,10 @@ import android.graphics.Path;
 import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 public class InputView extends View {
 
@@ -18,6 +22,8 @@ public class InputView extends View {
     float width;
     private TextToSpeech textToSpeech;
     TTSManager ttsManager = null;
+    long currentMS;
+    int mClickCount;
 
     public double[][] record;
 
@@ -31,6 +37,7 @@ public class InputView extends View {
         initSplitter();
         initPath();
         initMapping();
+
     }
 
     @Override
@@ -38,8 +45,16 @@ public class InputView extends View {
         recordPath(event);
         // judge input
         recognize(event);
+
+        Log.d(TAG,"mClickCount: "+mClickCount);
+        if(mClickCount==2)
+        {
+            this.setVisibility(View.GONE);
+        }
+
         // refresh
         invalidate();
+
         return true;
     }
 
@@ -133,8 +148,13 @@ public class InputView extends View {
             case MotionEvent.ACTION_DOWN:
                 count = 0;
                 record = new double[10000][2];
+                currentMS = System.currentTimeMillis();
                 break;
             case MotionEvent.ACTION_UP:
+                long moveTime = System.currentTimeMillis() - currentMS;
+                if(moveTime<200)  {
+                    mClickCount++;
+                }
                 int half = Gesture.getGesture(record, width);
                 if (half == 9) {
                     Log.d("gesture", "click");
@@ -166,6 +186,7 @@ public class InputView extends View {
             case MotionEvent.ACTION_MOVE:
                 record[count][0] = event.getX();
                 record[count++][1] = event.getY();
+                mClickCount=0;
                 break;
         }
     }

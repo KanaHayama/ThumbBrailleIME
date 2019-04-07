@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -24,6 +26,7 @@ public class InputView extends View {
     TTSManager ttsManager = null;
     long currentMS;
     int mClickCount;
+    Vibrator vibrator;
 
     public double[][] record;
 
@@ -31,6 +34,10 @@ public class InputView extends View {
         super(context);
         ttsManager = new TTSManager();
         ttsManager.init(context);
+        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if(vibrator.hasVibrator()){
+            vibrator.vibrate(1000);
+        }
         DisplayMetrics outMetrics = new DisplayMetrics();
         width = outMetrics.widthPixels;
         setBackgroundColor(Color.parseColor("#BB000000"));

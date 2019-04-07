@@ -32,7 +32,10 @@ public class Gesture {
                 break;
             }
         }
-
+        if(length == 0){
+            Log.d("Click","Click");
+            return 9;
+        }
         //clear
         if(length!=0) {
             if (path[length - 1][1] <= path[0][1]) {

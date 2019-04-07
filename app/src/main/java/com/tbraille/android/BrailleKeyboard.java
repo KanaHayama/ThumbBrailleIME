@@ -48,7 +48,7 @@ import java.io.OutputStream;
 
 public class BrailleKeyboard extends InputMethodService {
 
-    private static final String TAG = "ImageKeyboard";
+    private static final String TAG = "BrailleKeyboard";
     private static final String AUTHORITY = "com.tbraille.android.inputcontent";
     private static final String MIME_TYPE_GIF = "image/gif";
     private static final String MIME_TYPE_PNG = "image/png";
@@ -231,14 +231,17 @@ public class BrailleKeyboard extends InputMethodService {
         layout.addView(mGifButton);
         layout.addView(mPngButton);
         layout.addView(mWebpButton);
+        // demo
+        View inputView = new InputView(this);
+        layout.addView(inputView);
+
         return layout;
     }
 
     @Override
     public boolean onEvaluateFullscreenMode() {
-        // In full-screen mode the inserted content is likely to be hidden by the IME. Hence in this
-        // sample we simply disable full-screen mode.
-        return false;
+
+        return true;
     }
 
     @Override

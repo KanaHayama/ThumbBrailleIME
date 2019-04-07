@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ThumbBraille</string>
+    <string name="pref_title_view_settings">View</string>
+    <string name="pref_strong_hand_title">Strong hand</string>
+    <string name="pref_strong_hand_key">strong_hand</string>
+    <string name="pref_strong_hand_default_value">right</string>
 </resources>
